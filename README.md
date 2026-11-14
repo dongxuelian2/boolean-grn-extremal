@@ -45,3 +45,17 @@ Any proposed theorem must list its precise assumptions and a proof. Computations
 ## Status
 
 Published repository, active research. The initial commit provides a faithful problem definition and checked small cases. **No claim of solving the open extremal problem is made.**
+
+## Boundary asymptotics (research note)
+
+[Boundary entropy and escape of optimal inhibitory degrees](notes/boundary_entropy.md)
+proves fixed-boundary logarithmic asymptotics using the classical Dedekind
+asymptotic. In particular, every sequence of maximizing degrees has both its
+inhibitory and activating counts tending to infinity. This does **not** locate
+the exact maximizer or show its ratio tends to one half. The note includes the
+full proof, model scope, references and verification limits.
+
+```sh
+python3 scripts/boundary_bounds.py
+python3 -m unittest discover -s tests -v
+```
