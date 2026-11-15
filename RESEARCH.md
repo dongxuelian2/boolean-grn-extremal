@@ -1,5 +1,10 @@
 # Research program
 
+## Current active theorem program (2026-11-15)
+
+The long-term problem statement below remains binding, but the current research order and result status are in [docs/research/ROADMAP.md](docs/research/ROADMAP.md), [the claim register](docs/research/CLAIM_REGISTER.md), and [umbrella Issue #3](https://github.com/dongxuelian2/boolean-grn-extremal/issues/3). In particular, the central-width result is a working proof awaiting further review; neither a global finite-n classification nor biological causal claims are established.
+
+
 ## Problem and source
 
 Primary source: Harshavardhan, Adigwe, Jolly and Gedeon (2026), DOI: https://doi.org/10.1007/s11538-026-01791-4 — especially Sections 5, 6.1, 6.3 and Algorithm 6.12. Inspect the [authors' reference implementation](https://github.com/Harshavardhan-BV/Monotone-Bool-Net) before claiming a new counting algorithm.
