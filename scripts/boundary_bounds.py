@@ -46,3 +46,22 @@ if __name__ == '__main__':
         central = choose(n, n // 2)
         L = free_rank(n, m, n // 2)
         print(f'n={n}, m={m}, central={central}, lower_log2={L}, relative_deficit={Fraction(central-L,central)}')
+
+
+def uniform_middle_loss(n, m):
+    """Uniform upper bound on the constrained fraction of the central layer.
+
+    Requires at least one activating other input; can exceed one at boundaries.
+    Exact rational arithmetic, no asymptotic constants involved.
+    """
+    if n < 2 or not 0 <= m < n - 1:
+        raise ValueError('require n>=2 and 0<=m<n-1')
+    a = n - 1 - m
+    return Fraction(1, 2**(m + 1)) + Fraction(3*(a + 1), 2**a)
+
+
+def central_ratio(n, h):
+    """Exact 2**h * b_(n-h) / b_n for quantitative slice comparisons."""
+    if n < 1 or not 0 <= h < n:
+        raise ValueError('require n>=1 and 0<=h<n')
+    return Fraction(2**h * choose(n-h, (n-h)//2), choose(n,n//2))

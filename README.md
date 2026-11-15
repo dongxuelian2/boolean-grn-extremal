@@ -52,7 +52,10 @@ Published repository, active research. The initial commit provides a faithful pr
 proves fixed-boundary logarithmic asymptotics using the classical Dedekind
 asymptotic. In particular, every sequence of maximizing degrees has both its
 inhibitory and activating counts tending to infinity. This does **not** locate
-the exact maximizer or show its ratio tends to one half. The note includes the
+the exact maximizer or show its ratio tends to one half. The extension proves
+logarithmic exclusion bands for exact maximizers and characterizes first-order
+optimal sequences; the latter result explains why leading entropy alone cannot
+select a maximizing proportion. The note includes the
 full proof, model scope, references and verification limits.
 
 ```sh

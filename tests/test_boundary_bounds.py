@@ -56,5 +56,33 @@ class BoundaryBounds(unittest.TestCase):
             with self.assertRaises(ValueError): free_rank(*args)
 
 
+
+
+class UniformBounds(unittest.TestCase):
+    def test_uniform_middle_loss(self):
+        from boundary_bounds import uniform_middle_loss
+        for n in range(2,101):
+            for m in range(n-1):
+                fraction=Fraction(free_rank(n,m,n//2),comb(n,n//2))
+                self.assertGreaterEqual(fraction, 1-uniform_middle_loss(n,m))
+
+    def test_central_ratio_product(self):
+        from boundary_bounds import central_ratio
+        for n in range(2,101):
+            for h in range(n):
+                product=Fraction(1)
+                for d in range(n-h+1,n+1):
+                    product*=Fraction(d+1,d) if d%2 else 1
+                self.assertEqual(central_ratio(n,h),product)
+                self.assertGreaterEqual(product,1)
+                self.assertLessEqual(product,Fraction(n-h+2,n-h+1)**h)
+
+    def test_invalid_uniform_inputs(self):
+        from boundary_bounds import uniform_middle_loss, central_ratio
+        for args in [(1,0),(3,-1),(3,2)]:
+            with self.assertRaises(ValueError): uniform_middle_loss(*args)
+        for args in [(0,0),(3,-1),(3,3)]:
+            with self.assertRaises(ValueError): central_ratio(*args)
+
 if __name__ == '__main__':
     unittest.main()

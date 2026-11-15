@@ -4,7 +4,7 @@
 
 Let C(n,m) have exactly the meaning fixed in RESEARCH.md: every node has a positive self-loop, m of the other n−1 inputs are inhibitory, redundant inputs are permitted, and all single-high states must be fixed **simultaneously**. Put a=n−1−m and b_n=binom(n,floor(n/2)). Let D(d) count all increasing Boolean functions on d variables, including constants.
 
-**Theorem.** In this model:
+**Theorem 1.** In this model:
 
 1. For each fixed integer m≥0,
    log₂ C(n,m) / b_n → 1−2^(−m−1).
@@ -89,7 +89,98 @@ An independent proof review checked the free-layer extension, exceptional a=0 ca
 
 We inspected the source paper's Section 6.3 and Algorithm 6.12, and the author implementation at commit `964b78a67932a1ea369034a936d7e70a4816e254`, especially `SinglePositive/ms_count.py` and `src/mbnet/tl.py::unconstrained_count`. A direct execution of the author package was attempted but its `networkx` dependency was unavailable; we do not claim an executed author-code reproduction. The existing two independent baseline implementations were executed successfully. The author code propagates constraints and recursively counts unconstrained assignments; this note does not claim that routine as a new algorithm. The earlier balanced-network paper [4] treats related prevalence questions in a different network class. We have not established exhaustive novelty against the full constrained-antichain literature.
 
-The earlier no-self-loop equipotency enumeration is not used here. This theorem concerns a specified combinatorial ensemble, not observed biological probabilities. A useful next target would be a **quantitative growing boundary exclusion** or sharper uniform bounds that distinguish interior candidates; exact K(n) and the growth rates of its elements remain open in this note.
+The earlier no-self-loop equipotency enumeration is not used here. This theorem concerns a specified combinatorial ensemble, not observed biological probabilities. The following sections provide quantitative growing boundary exclusion and explain the limitation of first-order entropy. Exact K(n) and the optimal limiting proportion remain unresolved.
+
+## Uniform first-order optimality and a limitation of entropy comparisons
+
+**Theorem 2.** For any sequence 0≤m_n<n, with a_n=n−1−m_n,
+
+    log₂ C(n,m_n)/b_n → 1
+    if and only if m_n → ∞ and a_n → ∞.                       (9)
+
+For a≥1, the following uniform bound suffices:
+
+    log₂ C(n,m)/b_n ≥ 1−2^(−m−1)−3(a+1)2^(−a).               (10)
+
+To prove (10), choose a uniformly random r-subset of the n coordinates, where
+r=floor(n/2). Its probability of containing the m+1 coordinates required by a
+forced-one vertex is at most (r/n)^(m+1)≤2^(−m−1). A forced-zero vertex omits
+the self-coordinate and has at most one active coordinate. Cover this event by
+a+1 events, each requiring at least a specified zero coordinates. The probability
+of each is at most ((n−r)/n)^a≤2^(−a)(1+1/n)^a<3·2^(−a).
+Sampling without replacement only reduces these probabilities; if the specified
+set is too large the probability is zero. Apply the union bound and the free-rank
+extension in (2). The right side of (10) may be negative near a boundary, which
+causes no problem. When m_n and a_n both diverge, (10) and C(n,m)≤D(n) prove
+sufficiency. Otherwise an infinite subsequence has one boundary parameter fixed;
+the corresponding limit from Theorem 1 is strictly less than one. This proves
+necessity.
+
+Thus every fixed limiting proportion p∈(0,1) is first-order optimal, but so is
+m_n=floor(log₂ log₂ n) (for sufficiently large n), whose proportion tends to zero.
+These examples are not asserted to be **exact** maximizers. Equation (9) shows
+why first-order logarithmic entropy cannot determine the exact maximizing
+proportion: it deliberately loses the differences one needs to compare.
+
+## A logarithmic exclusion zone for exact maximizers
+
+The stronger classical bound of Kleitman–Markowsky [5] is
+
+    log₂ D(d) ≤ b_d(1+O(log₂ d/d)).                            (11)
+
+Here the constant is absolute. The original paper's first page explicitly states
+this order of error. We use (11) as an external theorem, not a newly proved
+Dedekind estimate.
+
+**Theorem 3.** There is an absolute constant A such that for all sufficiently
+large n every exact maximizer m, with a=n−1−m, satisfies
+
+    m ≥ log₂ n − log₂ log₂ n − A,
+    a ≥ log₂ n − A.                                          (12)
+
+No numerical value of A or effective threshold is supplied.
+
+**Proof.** Set ell=log₂ n. An exact maximizer has normalized log count at least
+1−eta_n, where eta_n=(1+floor(n/2)(n−1−floor(n/2)))/b_n, by (8).
+In particular eta_n=o(ell/n).
+
+For 0≤h<n, direct factorial cancellation gives
+
+    2^h b_(n−h)/b_n
+      = product over odd d in {n−h+1,...,n} of (1+1/d).         (13)
+
+Hence this ratio is 1+O(h/n), uniformly for h=O(ell).
+Suppose first m≤ell. Insert (11) in (3), with h=m+1. Uniformly in this range,
+
+    log₂ C(n,m)/b_n
+      ≤ (1−2^(−m−1))(1+O(ell/n)).                            (14)
+
+Comparison to 1−eta_n yields 2^(−m−1)≤B ell/n for an absolute positive B and
+all sufficiently large n. Taking logarithms gives the first inequality in (12)
+after enlarging A. If m>ell, that inequality already holds.
+
+For the second inequality, a=0 is already eventually excluded by Theorem 1.
+If 1≤a≤ell, use (4), (11), and (13), now with h=a+1, to obtain
+
+    (a+1)2^(−a−1) ≤ B' ell/n.                                (15)
+
+The left side is decreasing for integer a≥1. If a≤ell/2, it is at least
+(ell/2+1)2^(−ell/2−1), which eventually exceeds B' ell/n.
+Consequently a>ell/2. Substitution into (15) then gives 2^(−a)≤4B'/n,
+so a≥ell−log₂(4B'). If a>ell, the desired bound holds directly.
+Choose a single A large enough for both inequalities. ∎
+
+These statements strengthen fixed-width exclusion to growing boundary bands,
+but leave a wide interior and do not determine an optimal proportion. Theorem 2
+also distinguishes “first-order optimal” from “exactly maximizing”; confusing
+these would incorrectly rule in all interior degrees as exact maximizers.
+Further progress on a proportion requires sharper constrained-function counts,
+comparisons or injections, rather than another application of (6) alone.
+
+The added rational-arithmetic tests check (10) against the exact rank formula
+for every a≥1 through n=100, and check (13), including parity, for every h<n
+through n=100. They do not numerically certify the asymptotic constants in (11)
+or (12). The complete suite has 11 tests.
 
 ## References
 
@@ -97,3 +188,5 @@ The earlier no-self-loop equipotency enumeration is not used here. This theorem 
 2. D. Kleitman. *On Dedekind's problem: the number of monotone Boolean functions*. Proceedings of the American Mathematical Society 21 (1969), 677–682. https://doi.org/10.1090/S0002-9939-1969-0241334-6 .
 3. N. Pippenger. *Entropy and Enumeration*. University of British Columbia technical report TR-98-02 (1998), Theorem 2.1. https://www.cs.ubc.ca/sites/default/files/tr/1998/TR-98-02_0.pdf . This source was accessible and explicitly proves the asymptotic used in (6); the AMS PDF endpoint returned HTTP 403 during this review.
 4. S. Adigwe, Harshavardhan BV, M. K. Jolly and T. Gedeon. *Characterization of monotone Boolean models supporting fixed points and multistability in balanced networks*. PLOS Complex Systems 3(5), e0000103 (2026). https://doi.org/10.1371/journal.pcsy.0000103 .
+
+5. D. Kleitman and G. Markowsky. *On Dedekind’s problem: the number of isotone Boolean functions. II*. Transactions of the American Mathematical Society 213 (1975), 373–390. https://doi.org/10.1090/S0002-9947-1975-0382107-0 . Original-paper PDF consulted: https://scispace.com/pdf/on-dedekind-s-problem-the-number-of-isotone-boolean-2wnqs2wgvk.pdf ; author-affiliated record: https://research.ibm.com/publications/on-dedekinds-problem-the-number-of-isotone-boolean-functions-ii .
