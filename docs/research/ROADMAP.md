@@ -6,12 +6,19 @@ Apply rigorous combinatorics to the **specific** extremal question in [Harshavar
 
 ## Primary track A: asymptotic localization to exact classification
 
+**Continuation result:** [eventual classification proof draft](eventual_extremal_classification.md)
+supplies the even positive local correction, the odd `1:3:2` comparison, and
+eventual uniqueness. The historical tasks below now have a proposed proof;
+external review of the localized KP lemma is the immediate gate. Do not mark
+independent proof review complete from the finite coefficient checks. An
+effective threshold and all-size classification remain the next theorem target.
+
 1. **Audit and formalize the central-window proof** in [central_window_working_proof.md](central_window_working_proof.md). Provisional conclusion for all sufficiently large \(k\):
    \(K(2k)\subseteq\{k-2,k-1\}\), \(K(2k+1)\subseteq\{k-2,k-1,k\}\). The argument uses quantitative central-layer/antichain results of Jenssen–Malekshahian–Park (DOI 10.1112/jlms.70624); check every transfer from typical antichains to constrained node maps and verify the error terms. This is a **working proof**, without effective \(n_0\) or exhaustive priority audit.
 2. **Compare the remaining candidates at sufficient precision.** In even dimensions the free central-layer lower bound ties exactly:
    \(L(2k,k-2,k)=L(2k,k-1,k)=\binom{2k}{k}-(k+1)\). First-order Dedekind entropy and the central-layer lower bound cannot decide. Study the ratio \(C(2k,k-1)/C(2k,k-2)\), pinned polymer expansions, local defects and a uniform remainder smaller than the predicted gap.
-3. **Analyze odd dimensions independently.** Two central phases contribute differently; rigorously compare \(m=k-2,k-1,k\). A heuristic leading ratio \(1:3:2\) remains unproved, and must not be promoted into a theorem.
-4. **Close the finite gap.** Identify a computable/effective threshold, or prove an infinite-family classification and audit remaining finite exceptions with independent counting methods. A possible eventual unique-maximizer formula \(m=\lfloor n/2\rfloor-1\) is conjectural.
+3. **Analyze odd dimensions independently.** The new proof draft derives the leading ratio \(1:3:2\) with a relative error tending to zero. Audit its suppressed-phase bound and transfer from the equal phase mixture.
+4. **Close the finite gap.** The eventual formula \(m=\lfloor n/2\rfloor-1\) has a proof draft. Identify a computable/effective threshold and audit finite exceptions with independent counting methods, or find a direct all-size comparison.
 
 Acceptance: a precise stated theorem, complete proof with references and quantified errors, comparison to the original 2026 problem, independent checking, counterexample search, and a reviewable PR. More rows alone fail this criterion.
 

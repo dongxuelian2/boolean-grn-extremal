@@ -1,5 +1,10 @@
 # Working proof: constant-width localization of inhibitory-degree maximizers
 
+**Continuation:** [eventual extremal classification](eventual_extremal_classification.md)
+now gives a proof draft of the local ratios and eventual uniqueness left open
+below. It includes its own localization argument and a localized KP remainder
+lemma. The predictions in this earlier note describe its prior stopping point.
+
 **Status:** candidate proof audited internally on 2026-11-15, **not** externally peer-reviewed, published, or established novel relative to all later literature. No effective threshold is claimed. See [roadmap](ROADMAP.md).
 
 ## Model

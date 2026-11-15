@@ -4,6 +4,11 @@
 
 The long-term problem statement below remains binding, but the current research order and result status are in [docs/research/ROADMAP.md](docs/research/ROADMAP.md), [the claim register](docs/research/CLAIM_REGISTER.md), and [umbrella Issue #3](https://github.com/dongxuelian2/boolean-grn-extremal/issues/3). In particular, the central-width result is a working proof awaiting further review; neither a global finite-n classification nor biological causal claims are established.
 
+The [new eventual-classification proof draft](docs/research/eventual_extremal_classification.md)
+now resolves the remaining asymptotic candidate comparison. Its local KP
+perturbation lemma and the resulting eventual unique maximizer await external
+review. The finite threshold and all-size classification remain open.
+
 
 ## Problem and source
 

@@ -14,6 +14,16 @@ This follows Section 6.3 and Algorithm 6.12 of [Harshavardhan et al. (2026)](htt
 
 **Active research tracker:** [Issue #3 — inhibitory-degree classification](https://github.com/dongxuelian2/boolean-grn-extremal/issues/3). Detailed documentation changes are in [draft PR #2](https://github.com/dongxuelian2/boolean-grn-extremal/pull/2).
 
+**New proof draft (2026-11-15):** [eventual unique extremum](docs/research/eventual_extremal_classification.md).
+A local polymer perturbation argument gives `K(n)={floor(n/2)-1}` for all
+sufficiently large `n`, resolving both parity cases. The even ratio has positive
+correction `(k+1)2^-k`, and odd candidate weights are asymptotically `1:3:2`.
+The proof awaits external review; no effective threshold or all-size classification is claimed.
+
+Run `python scripts/check_local_coefficients.py` for the finite shadow/algebra
+audit. With Pandoc and XeLaTeX installed, `bash scripts/build_proof_pdf.sh`
+renders the complete proof note to `output/pdf/`.
+
 ## Start here
 
 | Resource | Purpose |
@@ -22,6 +32,7 @@ This follows Section 6.3 and Algorithm 6.12 of [Harshavardhan et al. (2026)](htt
 | [Research roadmap](docs/research/ROADMAP.md) | Prioritized theorem targets, alternative tracks, milestones, stop criteria |
 | [Claim register](docs/research/CLAIM_REGISTER.md) | Published / existing / working / open claims and validation responsibilities |
 | [Central-window working proof](docs/research/central_window_working_proof.md) | Candidate proof using quantitative antichain concentration; **not yet peer reviewed** |
+| [Eventual classification proof](docs/research/eventual_extremal_classification.md) | Localized remainder estimates, even tie-breaking, odd phase comparison; **proof draft** |
 | [Async-delay structural note](docs/research/async_delay_notes.md) | Separate model: a necessary degree profile for optimal delay placements |
 | [Literature reading ledger](docs/literature/reading-ledger-2026-11-15.md) | 131 deduplicated scholarly works, each with source, actual reading status and specific note |
 | [Earlier exact/asymptotic draft PR #1](https://github.com/dongxuelian2/boolean-grn-extremal/pull/1) | Boundary entropy, exclusion, exact slices, tests; **not yet merged** |
