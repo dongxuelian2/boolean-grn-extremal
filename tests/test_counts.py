@@ -54,7 +54,7 @@ class ExactCounts(unittest.TestCase):
         self.assertEqual(row(5).index(max(row(5))), 1)
 
     def test_invalid_range(self):
-        for n, m in [(1, 0), (6, 0), (3, -1), (3, 3)]:
+        for n, m in [(1, 0), (8, 0), (3, -1), (3, 3)]:
             with self.subTest(n=n, m=m):
                 with self.assertRaises(ValueError):
                     count_models(n, m)

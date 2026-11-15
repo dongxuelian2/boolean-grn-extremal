@@ -62,3 +62,19 @@ full proof, model scope, references and verification limits.
 python3 scripts/boundary_bounds.py
 python3 -m unittest discover -s tests -v
 ```
+
+## Exact boundary and extended counts
+
+[Exact slices and counts through seven nodes](notes/exact_slices.md) proves
+`C(n,n-2)=D(n-1)-D(n-2)`, so this degree is never optimal, for any `n>=2`.
+It also proves `C(n,n-3)>C(n,n-1)>C(n,n-2)` for every `n>=5`,
+excluding both largest inhibitory degrees and showing the profile is not
+unimodal. The exact six- and seven-node rows both have the unique maximizer `m=2`.
+Six-node counts have a separate slice-enumeration check; seven-node counts
+have two pivot-order checks and exact boundary identities. This does not
+settle the general maximizing degree or its limiting proportion.
+
+```sh
+python3 scripts/count_full_multistability.py --max-n 7
+python3 scripts/slice_counts.py
+```
