@@ -12,4 +12,5 @@ jobs:
           python-version: '3.12'
       - run: python3 scripts/count_full_multistability.py --max-n 5
       - run: python3 scripts/check_local_coefficients.py
+      - run: python3 scripts/check_grn_local_threshold.py
       - run: python3 -m unittest discover -s tests -v

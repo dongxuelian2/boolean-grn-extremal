@@ -2,6 +2,8 @@
 
 | Claim | State | Evidence and next requirement |
 | --- | --- | --- |
+| Eventual classification, manuscript version | **independent model-agent and integration review passed** | [Paper](../../manuscript/main.tex), [review](independent-grn-review-2026-11-15.md); not external human peer review |
+| Explicit local cutoff `2^20` and remainder `2^24 n^300 2^-n` | **conditional finite theorem** | Requires source KP; full certificate also requires TV <=`2^-2n`. No numerical unconditional global cutoff is proved. |
 | Simultaneous single-high positive-self-loop model | source-defined | [Harshavardhan et al., §6.3](https://doi.org/10.1007/s11538-026-01791-4); [RESEARCH.md](../../RESEARCH.md) |
 | Exact \(n=2,\dots,5\) values | independently finite-checked | Main scripts and antichain tests; **no universal extrapolation** |
 | Boundary entropy / logarithmic degree exclusions | mathematically argued, draft PR | [PR #1](https://github.com/dongxuelian2/boolean-grn-extremal/pull/1); audit Kleitman–Markowsky assumptions and external constants |

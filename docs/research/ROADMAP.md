@@ -1,5 +1,11 @@
 # Research roadmap — 2026-11-15
 
+**Current manuscript:** [main.tex](../../manuscript/main.tex) now includes
+independent model-agent review, an explicit local envelope and conditional
+cutoff `2^20`. The numerical source-global threshold is not extracted.
+See [the review](independent-grn-review-2026-11-15.md) before interpreting
+the historical milestones below; intrinsic ineffectivity is not claimed.
+
 ## Mission and scope
 
 Apply rigorous combinatorics to the **specific** extremal question in [Harshavardhan et al. (2026), §6.3](https://doi.org/10.1007/s11538-026-01791-4). The exact positive-self-loop, complete signed-input, simultaneous-single-high, redundant-inputs-allowed model is fixed in [RESEARCH.md](../../RESEARCH.md). Do not silently change network class or update semantics. The central question is \(K(n)=\arg\max_m C(n,m)\).

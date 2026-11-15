@@ -1,0 +1,428 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\hypersetup{pdftitle={The eventual extremal inhibitory degree for simultaneous single-high multistability}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\LL}{\mathcal L}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\EE}{\mathbb E}
+\newcommand{\TV}{d_{\mathrm{TV}}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\title{The eventual extremal inhibitory degree for simultaneous\allowbreak\ single-high multistability}
+\author{}
+\date{}
+\makeatletter
+\renewcommand{\maketitle}{\begin{center}{\Large\bfseries\@title\par}\end{center}\vspace{0.5em}}
+\makeatother
+\begin{document}
+\maketitle
+\begin{abstract}
+Consider increasing Boolean local rules obtained by complementing the
+inhibitory inputs at a positively self-looped vertex of a complete signed
+network. Require every single-high network state to be fixed simultaneously,
+and allow redundant inputs. If $C(n,m)$ is the number of compatible local
+rules with $m$ inhibitory inputs other than the self-variable, then for all
+sufficiently large $n$ its unique maximizing degree is
+$\lfloor n/2\rfloor-1$. In even dimension $n=2k$, the two leading
+candidates agree at their central-layer term; their ratio is
+$1+(k+1)2^{-k}+O(k^{1000}2^{-2k})$. In odd dimension the three remaining
+candidates have leading weights $1:3:2$. The proof combines quantitative
+antichain concentration with a localized polymer perturbation and a rooted
+expansion. A separate finite-dimensional certificate has an explicit local
+cutoff $2^{20}$, conditional on stated Koteck\'{y}--Preiss and phase
+approximation inequalities. No unconditional numerical cutoff or all-size
+classification is asserted.
+\end{abstract}
+\noindent\textbf{Keywords:} monotone Boolean function; antichain; signed
+Boolean network; extremal enumeration; cluster expansion.\\
+\textbf{2020 Mathematics Subject Classification:} 05A16, 06E30, 92B05.
+
+\section{Introduction}
+Local rule counts give a precise combinatorial observable for a signed
+Boolean network. Harshavardhan et al.\ \cite[Section 6.3]{GRN} ask which
+number of inhibitory inputs maximizes the count of rules compatible with
+all single-high states in one network. Their positive-self-loop setting is
+essential: an enumeration without self-loops, a single-state prevalence
+question, and simultaneous multistability impose different constraints.
+
+Let $s$ denote the self-variable, $Z$ the inhibitory variables and $A$ the
+other activating variables, so $|Z|=m$ and $|A|=n-1-m$. Identify inputs with
+subsets of $[n]$. After complementing the coordinates in $Z$, the local rule
+is increasing and must satisfy
+\begin{equation}\label{eq:constraints}
+ f(Z\cup\{s\})=1,\qquad
+ f(Z\cup\{j\})=0\ (j\in A),\qquad
+ f(Z\setminus\{j\})=0\ (j\in Z).
+\end{equation}
+Write $D(n)$ for the number of increasing Boolean functions, including the
+constant functions, and put
+\[
+ K(n)=\mathop{\rm arg\,max}_{0\le m<n}C(n,m).
+\]
+Variables need not be essential. The count is for local functions and does
+not assign probabilities to biological systems.
+
+\begin{theorem}\label{thm:main}
+For all sufficiently large $n$,
+\[
+ K(n)=\{\lfloor n/2\rfloor-1\}.
+\]
+For $n=2k$,
+\begin{equation}\label{eq:evenratio}
+ \frac{C(2k,k-1)}{C(2k,k-2)}
+ =1+(k+1)2^{-k}+O(k^{1000}2^{-2k}).
+\end{equation}
+For $n=2k+1$,
+\begin{equation}\label{eq:oddvector}
+ \frac{(C(n,k-2),C(n,k-1),C(n,k))}{D(n)2^{-k-3}}
+ =(1,3,2)+O(k^{1000}2^{-k}),
+\end{equation}
+with a componentwise error.
+\end{theorem}
+
+The asymptotic assertion does not specify its first valid dimension.
+Section~\ref{sec:cutoff} separates the part of that question settled here
+from the constants still required from the global antichain estimates.
+The central-layer contribution alone cannot prove
+\eqref{eq:evenratio}; the first nonzero local correction has to be retained.
+
+Increasing functions correspond bijectively to antichains of minimal true
+points. The detailed central-phase description of Jenssen, Malekshahian and
+Park \cite{JMP} provides the external enumerative input. The present
+argument concerns a constrained event of probability $2^{-O(n)}$ and a
+smaller relative difference of order $n2^{-n/2}$. This requires a localized
+estimate rather than the first-order logarithmic asymptotic for $D(n)$.
+
+\section{Central phases and the external estimates}\label{sec:phase}
+Let $L_r=\{x\subseteq[n]:|x|=r\}$. In a phase centered at $L_r$, a side
+polymer $\gamma$ lies entirely in $L_{r-1}$ or $L_{r+1}$, is connected by
+overlapping central shadows, and has weight
+\[
+ w_\gamma=2^{-|\partial\gamma|},\qquad
+ \partial\gamma=\{x\in L_r:x\text{ is comparable to some }v\in\gamma\}.
+\]
+For odd $n$, retain the additional condition
+$|\partial\gamma|\ge(1+1/n)|\gamma|$ on the larger side layer from
+\cite[Section 4]{JMP}. Two polymers are compatible when their shadows are
+disjoint. Let $\Xi$ be the resulting partition function. Given a compatible
+polymer collection, independently include each unblocked central point
+with probability $1/2$; the chosen points and polymers form an antichain.
+
+For even $n$, this sampling law is exactly the uniform law on antichains
+in $L_{n/2-1}\cup L_{n/2}\cup L_{n/2+1}$
+\cite[Lemma 6.1]{JMP}. For odd $n$, use the equal mixture of the phases
+centered at $L_{(n-1)/2}$ and $L_{(n+1)/2}$. Set $\nu_n$ to be this phase
+law and $\mu_n$ to be the full uniform antichain law. The external
+approximation gives
+\begin{equation}\label{eq:globaltv}
+ \TV(\mu_n,\nu_n)\le e^{-\Omega(n^2)}
+\end{equation}
+by \cite[Theorem 1.7 and Corollary 7.10]{JMP}. The lower-centered odd model
+is obtained by complementing sets in the upper-centered construction.
+
+The Koteck\'{y}--Preiss bound is used in the form stated in
+\cite[Theorem 2.2]{JMP}; see also \cite{KP}. With
+$f(\gamma)=|\gamma|/n^3$, the auxiliary function is
+\begin{equation}\label{eq:g}
+ g(\gamma)=\begin{cases}
+ ((n-2)|\gamma|/2-|\gamma|^2)\log2-100|\gamma|\log n,
+       &|\gamma|\le n/10,\\
+ n|\gamma|\log2/100,&n/10<|\gamma|\le n^4,\\
+ |\gamma|\log2/n^2,&|\gamma|>n^4.
+ \end{cases}
+\end{equation}
+For all sufficiently large $n$, the source proves
+\begin{equation}\label{eq:KP}
+ \sum_{\gamma'\not\sim\gamma}
+ w_{\gamma'}e^{f(\gamma')+g(\gamma')}\le f(\gamma).
+\end{equation}
+Consequently, if $\Gamma$ denotes a cluster and
+$g(\Gamma)=\sum_{\gamma\in\Gamma}g(\gamma)$, the absolute cluster sum
+incompatible with a singleton $\{v\}$ is at most $n^{-3}$ after
+multiplication by $e^{g(\Gamma)}$. Formula (4.4) of \cite{JMP} supplies
+the corresponding one-site polymer bound. All singleton and two-site
+polymers used below satisfy the odd expansion restriction at sufficiently
+large dimension.
+
+\section{Localized perturbations}\label{sec:local}
+Let $\rho=2^{-n/2}$. Cluster norm counts polymer sizes with multiplicity.
+
+\begin{lemma}\label{lem:local}
+Suppose $w_\gamma$ is replaced by $h_\gamma w_\gamma$, where
+$0\le h_\gamma\le\min(4^{|\gamma|},2^n)$, and $h_\gamma=1$ unless
+$\gamma$ meets a set $B$ of at most $4n^2$ side sites. Conditional on
+\eqref{eq:KP}, for $n\ge N_*=2^{20}$,
+\begin{equation}\label{eq:local}
+ \log\frac{\Xi_h}{\Xi}
+ =\sum_v(h_{\{v\}}-1)w_{\{v\}}+E_h,
+ \qquad |E_h|\le2^{13}n^{199}\rho^2.
+\end{equation}
+After exponentiation, the error relative to one plus the displayed
+singleton sum is at most $2^{15}n^{200}\rho^2$.
+\end{lemma}
+\begin{proof}
+Put $a(\gamma)=\min(2|\gamma|,n)\log2$ and $g_h=g-a$.
+At the stated dimension $g_h\ge0$, and
+$h_\gamma w_\gamma e^{f(\gamma)+g_h(\gamma)}
+\le w_\gamma e^{f(\gamma)+g(\gamma)}$. Hence the same KP bound applies
+to the modified gas with auxiliary function $g_h$; deletion of a polymer
+is allowed.
+
+For $t=2,3$ and $\norm\Gamma\ge t$, direct size estimates give
+\begin{equation}\label{eq:Lt}
+ g_h(\Gamma)\ge L_t(n)
+ =\left(\frac{n-6}{2}t-t^2\right)\log2-100t\log n.
+\end{equation}
+For completeness, for a small polymer of size $s\le n/10$, its
+contribution is at least
+$H_n(s)=((n-6)s/2-s^2)\log2-100s\log n\ge ns\log2/4$.
+The last inequality follows from $\log_2n\le\sqrt n$ and
+$3n/20-3-100\sqrt n>0$ at and above $N_*$. If the total small norm
+is in $[t,n/10]$, use $\sum s_i^2\le(\sum s_i)^2$ and minimize the
+concave quadratic at an endpoint. Its upper endpoint is at least
+$n^2\log2/40>L_3(n)$. Larger total small norm gives the same quadratic
+lower bound. A medium polymer contributes at least
+$(n^2/1000-n)\log2$, and a polymer of size greater than $n^4$
+contributes at least $(n^2-n)\log2$. Both exceed $L_3(n)$.
+This proves \eqref{eq:Lt} uniformly, including large polymers.
+
+In the difference of logarithmic cluster expansions, every noncancelling
+cluster contains a polymer meeting $B$ and is incompatible with a
+singleton at a site of $B$. Sum the anchored bound over $B$, for both
+gases, and apply \eqref{eq:Lt} with $t=2$. Since
+$e^{-L_2}=2^{10}n^{200}\rho^2$, the tail is at most
+$2|B|n^{-3}e^{-L_2}\le2^{13}n^{199}\rho^2$.
+The singleton sum has absolute value at most $12n^2\rho$.
+The bound $|e^x-1-x|\le x^2$ for $|x|\le1/2$, together with the
+logarithmic tail, gives the last assertion. The activity cap is needed:
+subtracting $2|\gamma|\log2$ without a cap would fail in the largest
+size range of \eqref{eq:g}.
+\end{proof}
+
+\begin{lemma}\label{lem:root}
+Let $t$ be a lower-side site and $F$ a set of at most $n$ forbidden
+lower-side neighbors of $t$. Let $I(t)$ be the side sites whose singleton
+shadows intersect $\partial\{t\}$, including $t$. In the applications
+below, the probability that $t$ is chosen and $F$ is absent equals
+\begin{equation}\label{eq:root}
+ \frac{P(t,F)}{w_t}
+ =1-\sum_{u\in I(t)\cup F}w_u
+   +\sum_{\substack{u\sim_2t\\u\notin F,\ u\ne t}}
+       \frac{w_{\{t,u\}}}{w_t}+E_t,
+ \qquad |E_t|\le R(n):=2^{24}n^{300}\rho^2,
+\end{equation}
+conditional on \eqref{eq:KP} and $n\ge N_*$. The second sum uses only
+same-side two-link neighbors.
+\end{lemma}
+\begin{proof}
+Decompose by the unique polymer containing $t$:
+\[
+ P(t,F)=\sum_{\substack{\gamma\ni t\\\gamma\cap F=\varnothing}}
+      w_\gamma\frac{\Xi_{F,\sim\gamma}}{\Xi}.
+\]
+For a singleton root, apply Lemma~\ref{lem:local} to the deletion gas.
+For a two-site root the deletion ratio differs from one by at most
+$8n^2\rho$. There are at most $n^2$ such roots and
+$w_{\{t,u\}}/w_t\le2\rho$, giving additional error at most
+$16n^4\rho^2$. Roots of size at least three have total weight bounded
+by the anchored KP sum times $e^{-L_3}$. As
+$w_t\ge\rho/4$, their contribution after division by $w_t$ is at most
+$2^{20}n^{297}\rho^2$. The singleton-deletion error and these two
+terms are bounded by $R(n)$.
+\end{proof}
+
+At $n\ge N_*$, $R(n)\le n^2\rho$, since
+$24+298\log_2n\le n/2$. Keeping the singleton bound and the preceding
+tails, each central-prescription or one-root leading probability used
+below has relative error at most $16n^2\rho$.
+
+\section{Breaking the even-dimensional tie}\label{sec:even}
+Set $n=2k$ and $w=2^{-k-1}=\rho/2$. All side singleton activities equal
+$w$. In the central candidate $m=k-1$, put $|Z|=k-1$. There are
+$k+1$ prescribed central values on
+$T=\{Z\cup\{s\}\}\cup\{Z\cup\{j\}:j\in A\}$, one true and $k$ false.
+Conditional on side polymers, the probability of the prescription is
+$2^{-k-1}\prod h_\gamma$. A polymer receives multiplier zero if it
+forces a prescribed wrong value, and otherwise multiplier
+$2^{|\partial\gamma\cap T|}$. The common lower site $Z$ is forbidden.
+Every other lower site hits at most one prescribed point and every upper
+site at most two. Thus Lemma~\ref{lem:local} applies. At most
+$n|T|\le2n^2$ side sites touch the prescription.
+
+\begin{center}
+\begin{tabular}{lrr}\toprule
+Side singleton class & Number & $h-1$\\\midrule
+Common lower site $Z$ & $1$ & $-1$\\
+Lower subset of the true point only & $k-1$ & $1$\\
+Lower subset of a zero point only & $k(k-1)$ & $-1$\\
+Upper site containing the true point & $k$ & $-1$\\
+Upper site containing two zero points & $\binom k2$ & $3$\\\bottomrule
+\end{tabular}
+\end{center}
+Hence the phase probability satisfies
+\begin{equation}\label{eq:pR}
+ p_R=w\left(1+\frac{k^2-k-4}{2}w+\epsilon_R\right),
+ \qquad |\epsilon_R|\le R(n).
+\end{equation}
+
+For $m=k-2$, the true site $t=Z\cup\{s\}$ lies in $L_{k-1}$ and
+the $k+1$ sites $Z\cup\{j\}$ are forbidden on that same rank.
+They are all two-link neighbors of $t$. The lower two-link degree of $t$
+is $k^2-1$, and it has $\binom{k+1}2$ incompatible upper sites.
+Each allowed two-site root has activity $2w^2$. Lemma~\ref{lem:root}
+therefore gives
+\begin{align}\label{eq:pL}
+ p_L/w
+ &=1+\left[-1-(k^2-1)-\binom{k+1}2
+                  +2(k^2-1-(k+1))\right]w+\epsilon_L\notag\\
+ &=1+\frac{k^2-5k-8}{2}w+\epsilon_L,
+ \qquad |\epsilon_L|\le R(n).
+\end{align}
+The inhibitory zeros in \eqref{eq:constraints} follow by monotonicity
+from the activating zeros in both candidates. The normalized difference
+in \eqref{eq:pR}--\eqref{eq:pL} is $(2k+2)w$ to first order.
+Moreover $p_L/w=1+O(n^2\rho)$, so division changes the retained
+correction only by $O(\mathrm{poly}(n)\rho^2)$.
+The full-measure error \eqref{eq:globaltv}, even divided by a probability
+of order $2^{-k}$, is smaller than the displayed remainders for all
+sufficiently large $k$. This proves \eqref{eq:evenratio}.
+
+\section{The two odd phases}\label{sec:odd}
+For $n=2k+1$, the conditional phase probabilities have the following
+leading terms; every displayed nonzero leading term has relative error
+$O(n^3\rho)$.
+\begin{center}
+\begin{tabular}{ccc}\toprule
+$m$ & Center $L_k$ & Center $L_{k+1}$\\\midrule
+$k-2$ & $2^{-k-2}(1+O(n^3\rho))$ & $0$\\
+$k-1$ & $2^{-k-2}(1+O(n^3\rho))$ & $2^{-k-1}(1+O(n^3\rho))$\\
+$k$ & $O(2^{-2k})$ & $2^{-k-1}(1+O(n^3\rho))$\\\bottomrule
+\end{tabular}
+\end{center}
+The first entry is a forced lower site with shadow size $k+2$;
+the upper-centered phase cannot make that point true. In the second row,
+the lower-centered phase prescribes $k+2$ central values, whereas the
+upper-centered phase forces a lower site of shadow size $k+1$.
+The last upper-phase entry prescribes $k+1$ central values. The same
+common-site exclusion as in Section~\ref{sec:even} bounds all allowed
+shadow multipliers, so Lemmas~\ref{lem:local}--\ref{lem:root} apply.
+The touched-site count is at most $n|T|+n\le2n^2$ for central
+prescriptions and the necessary zero event, and at most $3n^2$ for
+the one- and two-root deletion gases.
+
+To justify the suppressed entry, the $k$ required zero sites $Z\cup\{j\}$
+at rank $k+1$ have lower central shadow
+\[
+ W=\{Z\}\cup\{(Z\setminus\{z\})\cup\{j\}:z\in Z,j\in A\},
+ \qquad |W|=1+k^2.
+\]
+Choose any $2k$ points $W'$ of $W$. They must all be false. Lower side
+sites meeting $W'$ are forbidden, as are the original upper zero sites.
+Any other upper side site meets at most two members of $W'$: it either
+contains $Z$, or omits one point of $Z$ and adds two outside points.
+The necessary zero event thus has probability at most
+$2^{-2k}\Xi_h/\Xi=O(2^{-2k})$ by Lemma~\ref{lem:local}.
+Averaging the two phase columns and using \eqref{eq:globaltv} proves
+\eqref{eq:oddvector}.
+
+\section{Excluding all other degrees}\label{sec:localization}
+Apply the central-rank approximation to both $f$ and the uniformly
+distributed dual function $f^\dagger(x)=1-f([n]\setminus x)$. Except on
+probability $e^{-\Omega(n^2)}$, every true point has rank at least
+$\lfloor n/2\rfloor-1$ and every false point has rank at most
+$\lceil n/2\rceil+1$. Since the prescribed true and activating-zero
+points have rank $m+1$, only
+\[
+ \lfloor n/2\rfloor-2\le m\le\lceil n/2\rceil
+\]
+remain. When $A$ is empty, its required zeros of rank $n-2$ exclude that
+endpoint for sufficiently large $n$. A central candidate has probability
+$2^{-O(n)}$, larger than the exceptional probability.
+
+At the remaining right edge, $m=k$ for $n=2k$ or $m=k+1$ for $n=2k+1$,
+the dual function has $k-1$ required true points of rank $k-1$ sharing
+a central upper neighbor. In any phase allowing such true points, they
+must be minimal true points in a single side polymer of linear size.
+The anchored bound and \eqref{eq:g} make this event
+$e^{-\Omega(n^2)}$. The other odd phase makes these points impossible.
+This leaves exactly the candidates compared in
+Sections~\ref{sec:even}--\ref{sec:odd}, proving Theorem~\ref{thm:main}.
+
+\section{A finite certificate and the cutoff question}\label{sec:cutoff}
+\begin{theorem}\label{thm:certificate}
+At a fixed dimension $n$, assume $n\ge2^{20}$, the KP inequality
+\eqref{eq:KP}, and $\TV(\mu_n,\nu_n)\le2^{-2n}$.
+Then $K(n)=\{\lfloor n/2\rfloor-1\}$.
+\end{theorem}
+\begin{proof}
+The local envelope implies in even dimension
+\[
+ p_R-p_L\ge\frac{n+2}{8}\rho^2.
+\]
+Indeed the leading difference is $(n+2)\rho^2/4$, with error at most
+$\rho R(n)$. The sufficient inequality
+\[
+ 27+300\log_2n-n/2-\log_2(n+2)\le0
+\]
+holds for every $n\ge2^{20}$ by $\log_2n\le\sqrt n$ and the resulting
+decreasing upper envelope. This gap exceeds twice the assumed TV error.
+In odd dimension, keeping the estimates in the preceding proof gives a
+componentwise error at most $64n^2\rho$ in the vector normalized by
+$2^{-k-3}$. The bound $256n^2\rho\le1$ separates its largest coefficient.
+For localization, the right-edge polymer probability is at most
+$n^{-3}2^{-n^2/300}$, plus the TV error. All other excluded degrees have
+only the latter error, with a factor two if both rank tests are used.
+These probabilities are smaller than the central candidate.
+\end{proof}
+
+Theorem~\ref{thm:certificate} is an explicit finite test with external
+conditions. It does not prove those conditions at $n=2^{20}$.
+JMP proves that they hold eventually, which is sufficient for
+Theorem~\ref{thm:main}. Extracting an unconditional numerical cutoff must
+also make explicit the source's container and phase-error constants,
+including its embedding dimensions from $n$ to $2n$. No intrinsic
+ineffectivity is claimed; that numerical extraction has not been carried
+out here. An all-size theorem would additionally have to address the
+finite range below a proved global cutoff.
+
+\section{Interpretation and reproducibility}
+For a fixed signed complete graph with inhibitory indegrees $m_i$, the
+local choices are independent and their count is $\prod_i C(n,m_i)$.
+Consequently this observable does not distinguish cycle arrangements
+at a fixed degree sequence. The result identifies the extremal degree
+within the stated ensemble, not a dynamical or biological mechanism.
+
+The accompanying source includes two different finite coefficient audits,
+the reference antichain counter, and a logarithmic checker for the
+elementary inequalities in Section~\ref{sec:cutoff}. These computations
+check algebra and implementation; the unbounded-dimensional statements
+follow from the proofs. The source-version map and an independently
+instructed model-agent audit are retained separately. Such an audit is
+not external human peer review or formal proof verification.
+
+\begin{thebibliography}{9}
+\bibitem{GRN}
+B. V. Harshavardhan, S. Adigwe, M. K. Jolly and T. Gedeon,
+Gene Regulatory Networks that Support Multi-fate Cellular Decisions,
+\emph{Bulletin of Mathematical Biology} \textbf{88} (2026), article 220.
+\href{https://doi.org/10.1007/s11538-026-01791-4}{doi:10.1007/s11538-026-01791-4}.
+\bibitem{JMP}
+M. Jenssen, A. Malekshahian and J. Park,
+On Dedekind's problem, a sparse version of Sperner's theorem, and antichains
+of a given size in the Boolean lattice,
+\emph{Journal of the London Mathematical Society} \textbf{114} (2026), e70624.
+\href{https://doi.org/10.1112/jlms.70624}{doi:10.1112/jlms.70624}.
+Preprint version used for comparison: arXiv:2411.03400v2.
+\bibitem{KP}
+R. Koteck\'{y} and D. Preiss,
+Cluster expansion for abstract polymer models,
+\emph{Communications in Mathematical Physics} \textbf{103} (1986), 491--498.
+\href{https://doi.org/10.1007/BF01211762}{doi:10.1007/BF01211762}.
+\end{thebibliography}
+\end{document}

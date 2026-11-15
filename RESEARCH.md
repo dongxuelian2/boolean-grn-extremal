@@ -9,6 +9,11 @@ now resolves the remaining asymptotic candidate comparison. Its local KP
 perturbation lemma and the resulting eventual unique maximizer await external
 review. The finite threshold and all-size classification remain open.
 
+The [complete manuscript](manuscript/main.tex) now incorporates independent
+model-agent review and a conditional cutoff `2^20` with explicit local error.
+The unconditional numerical cutoff has not been extracted from the published
+global estimates; the paper separates these statements.
+
 
 ## Problem and source
 

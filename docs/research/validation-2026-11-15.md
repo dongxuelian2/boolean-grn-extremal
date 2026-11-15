@@ -1,5 +1,19 @@
 # Eventual-extremum proof audit, 2026-11-15
 
+## Manuscript continuation
+
+The full paper `manuscript/main.tex` is now complete and incorporates an
+independent model-agent review and integration review. It proves the explicit
+local envelope and conditional certificate; these do not establish an
+unconditional numerical threshold. All 6 final PDF pages were rendered and
+inspected; the final LaTeX log has no missing-reference or overflow warning.
+The local-coefficient script, conditional-threshold script and all 3 reference
+tests passed. An anonymous source/PDF package and covering-letter text are
+provided; author identity is omitted at the user's request. The original
+pre-review snapshot below is retained as history.
+
+## Initial proof-note snapshot
+
 Scope: the new [proof draft](eventual_extremal_classification.md), not an
 all-size classification or an external referee report.
 

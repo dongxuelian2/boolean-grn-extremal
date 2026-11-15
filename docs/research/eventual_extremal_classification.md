@@ -1,8 +1,17 @@
 # Eventual unique extremal inhibitory degree
 
-Research proof draft, 2026-11-15. This note supplies the local estimates missing
+**Manuscript-stage continuation:** [full paper](../../manuscript/main.tex),
+[independent review](independent-grn-review-2026-11-15.md). The manuscript
+gives local remainder `R(n)=2^24 n^300 2^-n` at `n>=2^20`, conditional on
+source KP. A full finite certificate also assumes TV error <=`2^-2n`.
+Those external conditions have not been established at that numerical
+dimension. Independent model-agent and integration reviews passed; they
+are not external human peer review. The previous stopping-point language
+below is superseded by this continuation.
+
+Research proof note, 2026-11-15. This note supplies the local estimates missing
 from the central-window note. It is a mathematical argument, not an external
-referee report. The threshold is not effective; classification at every finite
+referee report. No unconditional numerical cutoff has been extracted; classification at every finite
 size remains open. The counting model permits redundant inputs.
 
 ## 1. Statement

@@ -18,7 +18,14 @@ This follows Section 6.3 and Algorithm 6.12 of [Harshavardhan et al. (2026)](htt
 A local polymer perturbation argument gives `K(n)={floor(n/2)-1}` for all
 sufficiently large `n`, resolving both parity cases. The even ratio has positive
 correction `(k+1)2^-k`, and odd candidate weights are asymptotically `1:3:2`.
-The proof awaits external review; no effective threshold or all-size classification is claimed.
+The argument is now a [complete manuscript](manuscript/main.tex), with an
+[independent model-agent review](docs/research/independent-grn-review-2026-11-15.md).
+An explicit local remainder and conditional cutoff `n>=2^20` are proved.
+No unconditional numerical cutoff or all-size classification is claimed.
+This review is not external human peer review.
+
+Build the paper with `bash scripts/build_manuscript.sh`; run
+`python scripts/check_grn_local_threshold.py` for the elementary cutoff audit.
 
 Run `python scripts/check_local_coefficients.py` for the finite shadow/algebra
 audit. With Pandoc and XeLaTeX installed, `bash scripts/build_proof_pdf.sh`
@@ -57,6 +64,6 @@ Validated main-branch counts:
 
 ## What is and is not a result
 
-Draft PR #1 proposes rigorous boundary results, including \(C(n,n-3)>C(n,n-1)>C(n,n-2)\) for all \(n\ge5\); the exact all-size maximizer remains open. A later working proof narrows the asymptotic candidates to a constant-width central window but has not established eventual uniqueness or an effective threshold. These findings concern **counts under the defined combinatorial ensemble**. For a fixed signed graph \(G\) with inhibitory indegrees \(m_i\), its admissible full-network count factors as \(\prod_i C(n,m_i)\), so this observable cannot distinguish distinct cycle architectures having identical indegrees. Claims about real-cell probabilities, attractor basins or causal regulatory mechanisms require separate dynamical and biological validation.
+Draft PR #1 proposes rigorous boundary results, including \(C(n,n-3)>C(n,n-1)>C(n,n-2)\) for all \(n\ge5\); the exact all-size maximizer remains open. The current manuscript establishes eventual uniqueness and an explicit conditional finite certificate; it does not supply an unconditional numerical cutoff. These findings concern **counts under the defined combinatorial ensemble**. For a fixed signed graph \(G\) with inhibitory indegrees \(m_i\), its admissible full-network count factors as \(\prod_i C(n,m_i)\), so this observable cannot distinguish distinct cycle architectures having identical indegrees. Claims about real-cell probabilities, attractor basins or causal regulatory mechanisms require separate dynamical and biological validation.
 
 See the [roadmap](docs/research/ROADMAP.md) before opening a new research branch. Proof, source-version audit and independent checks are required before calling an assertion established.
