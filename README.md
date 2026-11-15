@@ -1,47 +1,49 @@
 # Boolean GRN Extremal Combinatorics
 
-A reproducible research workspace for extremal questions about **monotone Boolean gene regulatory networks** (GRNs), with an emphasis on rigorous, size-independent results rather than larger finite enumerations.
+A theorem-first research project on **full simultaneous single-high multistability** in signed monotone Boolean gene-regulatory networks. Our principal objective is a structural characterization of the maximizing number of inhibitory inputs for arbitrary network size—not further isolated counting rows.
 
-## Research target
+## Precisely defined problem
 
-The starting point is Section 6.3 and Algorithm 6.12 of:
+A complete signed network has \(n\) vertices, a **positive self-loop** at each vertex, and \(m\) inhibitory inputs among the other \(n-1\) inputs of a distinguished node. Each local rule respects the signs (redundant variables are permitted). All \(n\) single-high states \(e_1,\ldots,e_n\) must be fixed by the **same** Boolean network. After complementing inhibitory coordinates, let \(C(n,m)\) count admissible monotone local functions. We seek
 
-B. V. Harshavardhan, S. Adigwe, M. K. Jolly, and T. Gedeon, [*Gene Regulatory Networks that Support Multi-fate Cellular Decisions*](https://doi.org/10.1007/s11538-026-01791-4), *Bulletin of Mathematical Biology* **88**, article 220 (2026). [Author code](https://github.com/Harshavardhan-BV/Monotone-Bool-Net).
+\[
+K(n)=\operatorname*{arg\,max}_{0\le m<n}C(n,m).
+\]
 
-Fix a fully connected signed network on `n` vertices, including a **positive self-loop** at each vertex. At a distinguished vertex, let exactly `m` of the other `n-1` incoming edges be inhibitory. After complementing those inhibitory inputs, define `W(n,m)` to be the set of increasing Boolean functions at that vertex which simultaneously support **all** single-high network states as fixed points. The primary extremal problem is
+This follows Section 6.3 and Algorithm 6.12 of [Harshavardhan et al. (2026)](https://doi.org/10.1007/s11538-026-01791-4). Do not conflate this with single-state equipotency or with an earlier no-self-loop enumeration.
 
-```text
-K(n) = argmax_{0 <= m < n} |W(n,m)| .
-```
+## Start here
 
-The cited paper reports maximizing inhibitory counts `m=n-1` for `n=3,4`, but `m=1` for `n=5`; a general combinatorial explanation for `n>5` is open in that paper.
+| Resource | Purpose |
+| --- | --- |
+| [RESEARCH.md](RESEARCH.md) | Exact mathematical model, original problem, source and reproducibility constraints |
+| [Research roadmap](docs/research/ROADMAP.md) | Prioritized theorem targets, alternative tracks, milestones, stop criteria |
+| [Claim register](docs/research/CLAIM_REGISTER.md) | Published / existing / working / open claims and validation responsibilities |
+| [Central-window working proof](docs/research/central_window_working_proof.md) | Candidate proof using quantitative antichain concentration; **not yet peer reviewed** |
+| [Async-delay structural note](docs/research/async_delay_notes.md) | Separate model: a necessary degree profile for optimal delay placements |
+| [Literature reading ledger](docs/literature/reading-ledger-2026-11-15.md) | 131 deduplicated scholarly works, each with source, actual reading status and specific note |
+| [Earlier exact/asymptotic draft PR #1](https://github.com/dongxuelian2/boolean-grn-extremal/pull/1) | Boundary entropy, exclusion, exact slices, tests; **not yet merged** |
 
-**Two distinct objectives must not be conflated:** (a) *equipotency*, where individual single-high states occur with equal frequency among compatible models (paper Section 5), and (b) *full multistability*, where one and the same model supports all these states (Section 6). This repository focuses on **(b)**. A previous six-node, no-self-loop network enumeration is a different setting and does not establish the `n>5` extremal result.
+The original reference implementation remains in scripts/ and tests/. On main the reproducible small-case baseline is \(n\le 5\), while the draft PR additionally computes \(n=6,7\) and proves nontrivial boundary exclusions.
 
-## Verified reference implementation
+## Run the existing baseline
 
-`scripts/count_full_multistability.py` uses exact bitset order-ideal counting on the Boolean lattice, with fixed-point constraints propagated by monotonicity. The test suite independently enumerates antichains (minimal true assignments) and checks the same counts. No external packages, GPU or wet-lab data are needed.
-
-```sh
+~~~sh
 python3 scripts/count_full_multistability.py --max-n 5
 python3 -m unittest discover -s tests -v
-```
+~~~
 
-| Nodes `n` | Counts `|W(n,m)|` for `m=0,...,n-1` | Maximizing `m` |
+Validated main-branch counts:
+
+| \(n\) | \(C(n,0),\ldots,C(n,n-1)\) | maximizer |
 | --- | --- | --- |
 | 2 | 1, 4 | 1 |
 | 3 | 2, 3, 10 | 2 |
 | 4 | 9, 17, 14, 38 | 3 |
 | 5 | 114, 575, 445, 148, 334 | 1 |
 
-These are reproducible **finite checks**, not a new general theorem. The reference counter is deliberately bounded to `2 <= n <= 5`; its exponential strategy is unsuitable as an approach to arbitrary `n`.
+## What is and is not a result
 
-## Research direction
+Draft PR #1 proposes rigorous boundary results, including \(C(n,n-3)>C(n,n-1)>C(n,n-2)\) for all \(n\ge5\); the exact all-size maximizer remains open. A later working proof narrows the asymptotic candidates to a constant-width central window but has not established eventual uniqueness or an effective threshold. These findings concern **counts under the defined combinatorial ensemble**. For a fixed signed graph \(G\) with inhibitory indegrees \(m_i\), its admissible full-network count factors as \(\prod_i C(n,m_i)\), so this observable cannot distinguish distinct cycle architectures having identical indegrees. Claims about real-cell probabilities, attractor basins or causal regulatory mechanisms require separate dynamical and biological validation.
 
-See [RESEARCH.md](RESEARCH.md) for the mathematical work program and evidence standards. Priority is to replace repeated finite searches with a formula, recurrence, asymptotic result, rigorous extremal classification, or a decisive structural obstruction for unbounded `n`.
-
-Any proposed theorem must list its precise assumptions and a proof. Computations should come with independently checkable scripts; claims about actual biological systems require biological evidence beyond this abstract network model.
-
-## Status
-
-Published repository, active research. The initial commit provides a faithful problem definition and checked small cases. **No claim of solving the open extremal problem is made.**
+See the [roadmap](docs/research/ROADMAP.md) before opening a new research branch. Proof, source-version audit and independent checks are required before calling an assertion established.
