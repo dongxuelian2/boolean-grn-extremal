@@ -12,6 +12,8 @@ K(n)=\operatorname*{arg\,max}_{0\le m<n}C(n,m).
 
 This follows Section 6.3 and Algorithm 6.12 of [Harshavardhan et al. (2026)](https://doi.org/10.1007/s11538-026-01791-4). Do not conflate this with single-state equipotency or with an earlier no-self-loop enumeration.
 
+**Active research tracker:** [Issue #3 — inhibitory-degree classification](https://github.com/dongxuelian2/boolean-grn-extremal/issues/3). Detailed documentation changes are in [draft PR #2](https://github.com/dongxuelian2/boolean-grn-extremal/pull/2).
+
 ## Start here
 
 | Resource | Purpose |
