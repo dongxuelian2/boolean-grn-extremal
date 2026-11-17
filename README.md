@@ -1,69 +1,69 @@
 # Boolean GRN Extremal Combinatorics
 
-A theorem-first research project on **full simultaneous single-high multistability** in signed monotone Boolean gene-regulatory networks. Our principal objective is a structural characterization of the maximizing number of inhibitory inputs for arbitrary network size—not further isolated counting rows.
+This project studies the inhibitory input counts that maximize full
+single-high multistability in signed monotone Boolean gene-regulatory networks.
 
-## Precisely defined problem
+## Model and results
 
-A complete signed network has \(n\) vertices, a **positive self-loop** at each vertex, and \(m\) inhibitory inputs among the other \(n-1\) inputs of a distinguished node. Each local rule respects the signs (redundant variables are permitted). All \(n\) single-high states \(e_1,\ldots,e_n\) must be fixed by the **same** Boolean network. After complementing inhibitory coordinates, let \(C(n,m)\) count admissible monotone local functions. We seek
+Consider a complete signed network on `n` vertices with a positive self-loop
+at every vertex. At a distinguished node, exactly `m` of the other `n − 1`
+inputs are inhibitory. Local rules respect the input signs and may have
+redundant variables. Every single-high state must be fixed by the same network.
+After complementing inhibitory coordinates, let `C(n,m)` count the compatible
+monotone local rules, and define
 
-\[
-K(n)=\operatorname*{arg\,max}_{0\le m<n}C(n,m).
-\]
+```text
+K(n) = argmax_{0 ≤ m < n} C(n,m).
+```
 
-This follows Section 6.3 and Algorithm 6.12 of [Harshavardhan et al. (2026)](https://doi.org/10.1007/s11538-026-01791-4). Do not conflate this with single-state equipotency or with an earlier no-self-loop enumeration.
+The manuscript gives an argument that `K(n) = {floor(n/2) − 1}` for all
+sufficiently large `n`. Its even and odd cases use local polymer estimates and
+antichain concentration. A finite certificate for `n ≥ 2^20` assumes the
+specified Kotecký–Preiss inequality and phase-approximation bound at the
+relevant dimension. An unconditional numerical cutoff and a classification
+for every finite size remain open. External peer review and broader priority
+review are pending.
 
-**Active research tracker:** [Issue #3 — inhibitory-degree classification](https://github.com/dongxuelian2/boolean-grn-extremal/issues/3). Detailed documentation changes are in [draft PR #2](https://github.com/dongxuelian2/boolean-grn-extremal/pull/2).
+For a fixed signed graph with inhibitory indegrees `m_i`, the network count
+factors as `∏ C(n,m_i)`. The results describe this combinatorial count;
+attractor basins and biological probabilities require separate models and
+measurements.
 
-**New proof draft (2026-11-15):** [eventual unique extremum](docs/research/eventual_extremal_classification.md).
-A local polymer perturbation argument gives `K(n)={floor(n/2)-1}` for all
-sufficiently large `n`, resolving both parity cases. The even ratio has positive
-correction `(k+1)2^-k`, and odd candidate weights are asymptotically `1:3:2`.
-The argument is now a [complete manuscript](manuscript/main.tex), with an
-[independent model-agent review](docs/research/independent-grn-review-2026-11-15.md).
-An explicit local remainder and conditional cutoff `n>=2^20` are proved.
-No unconditional numerical cutoff or all-size classification is claimed.
-This review is not external human peer review.
+The model follows Section 6.3 and Algorithm 6.12 of [Harshavardhan et al.
+(2026)](https://doi.org/10.1007/s11538-026-01791-4). The paper also studies
+single-state equipotency, a different observable.
 
-Build the paper with `bash scripts/build_manuscript.sh`; run
-`python scripts/check_grn_local_threshold.py` for the elementary cutoff audit.
+- [Manuscript](manuscript/main.tex): eventual classification, assumptions,
+  proof, and references.
+- [Eventual classification note](docs/research/eventual_extremal_classification.md):
+  local estimates, asymptotics, and the conditional finite certificate.
+- [Research model](RESEARCH.md): definitions and fixed-point constraints.
+- [Claim register](docs/research/CLAIM_REGISTER.md): evidence and open questions.
+- [Research roadmap](docs/research/ROADMAP.md): further mathematical targets.
+- [Literature ledger](docs/literature/reading-ledger-2026-11-15.md): sources
+  and their inspection levels.
 
-Run `python scripts/check_local_coefficients.py` for the finite shadow/algebra
-audit. With Pandoc and XeLaTeX installed, `bash scripts/build_proof_pdf.sh`
-renders the complete proof note to `output/pdf/`.
+## Reproduce
 
-## Start here
+The baseline enumerator uses Python's standard library. Its small-case counts
+are checked independently by antichain enumeration:
 
-| Resource | Purpose |
-| --- | --- |
-| [RESEARCH.md](RESEARCH.md) | Exact mathematical model, original problem, source and reproducibility constraints |
-| [Research roadmap](docs/research/ROADMAP.md) | Prioritized theorem targets, alternative tracks, milestones, stop criteria |
-| [Claim register](docs/research/CLAIM_REGISTER.md) | Published / existing / working / open claims and validation responsibilities |
-| [Central-window working proof](docs/research/central_window_working_proof.md) | Candidate proof using quantitative antichain concentration; **not yet peer reviewed** |
-| [Eventual classification proof](docs/research/eventual_extremal_classification.md) | Localized remainder estimates, even tie-breaking, odd phase comparison; **proof draft** |
-| [Async-delay structural note](docs/research/async_delay_notes.md) | Separate model: a necessary degree profile for optimal delay placements |
-| [Literature reading ledger](docs/literature/reading-ledger-2026-11-15.md) | 131 deduplicated scholarly works, each with source, actual reading status and specific note |
-| [Earlier exact/asymptotic draft PR #1](https://github.com/dongxuelian2/boolean-grn-extremal/pull/1) | Boundary entropy, exclusion, exact slices, tests; **not yet merged** |
-
-The original reference implementation remains in scripts/ and tests/. On main the reproducible small-case baseline is \(n\le 5\), while the draft PR additionally computes \(n=6,7\) and proves nontrivial boundary exclusions.
-
-## Run the existing baseline
-
-~~~sh
+```sh
 python3 scripts/count_full_multistability.py --max-n 5
 python3 -m unittest discover -s tests -v
-~~~
+```
 
-Validated main-branch counts:
-
-| \(n\) | \(C(n,0),\ldots,C(n,n-1)\) | maximizer |
+| `n` | `C(n,0), …, C(n,n−1)` | Maximizing `m` |
 | --- | --- | --- |
 | 2 | 1, 4 | 1 |
 | 3 | 2, 3, 10 | 2 |
 | 4 | 9, 17, 14, 38 | 3 |
 | 5 | 114, 575, 445, 148, 334 | 1 |
 
-## What is and is not a result
+Run `python3 scripts/check_grn_local_threshold.py` for the elementary
+finite-certificate calculations and `python3 scripts/check_local_coefficients.py`
+for the shadow and algebra checks. These finite checks accompany the proof.
 
-Draft PR #1 proposes rigorous boundary results, including \(C(n,n-3)>C(n,n-1)>C(n,n-2)\) for all \(n\ge5\); the exact all-size maximizer remains open. The current manuscript establishes eventual uniqueness and an explicit conditional finite certificate; it does not supply an unconditional numerical cutoff. These findings concern **counts under the defined combinatorial ensemble**. For a fixed signed graph \(G\) with inhibitory indegrees \(m_i\), its admissible full-network count factors as \(\prod_i C(n,m_i)\), so this observable cannot distinguish distinct cycle architectures having identical indegrees. Claims about real-cell probabilities, attractor basins or causal regulatory mechanisms require separate dynamical and biological validation.
-
-See the [roadmap](docs/research/ROADMAP.md) before opening a new research branch. Proof, source-version audit and independent checks are required before calling an assertion established.
+Build the manuscript with `bash scripts/build_manuscript.sh` and a LaTeX
+installation. With Pandoc and XeLaTeX, `bash scripts/build_proof_pdf.sh`
+renders the classification note.
